@@ -1,5 +1,6 @@
 package com.tienda.online.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import com.tienda.online.repositories.ArticuloRepository;
 
 @Service
 public class ArticuloService {
-	
+
 	private ArticuloRepository articuloRepository;
 
 	@Autowired
@@ -19,20 +20,16 @@ public class ArticuloService {
 		this.articuloRepository = articuloRepository;
 	}
 	
-	
-	public Articulo  guardarArticulo(Articulo artiulo) {
-		return articuloRepository.save(artiulo);
+	public Articulo guardar(Articulo articulo) {
+		articulo.setFecha(new Date());
+		return articuloRepository.save(articulo);
 	}
 	
-	public List<Articulo> obtenerTodosArticulos(){
+	public List<Articulo> obtenerTodos(){
 		return (List<Articulo>) articuloRepository.findAll();
 	}
 	
-	public void eliminar(Integer id) {
-		articuloRepository.delete(id);
+	public void eliminar(Integer codigo) {
+		articuloRepository.delete(codigo);
 	}
-	
-	
-	
-
 }

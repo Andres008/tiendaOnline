@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
 @Entity
 public class Usuario {
 
@@ -27,34 +26,12 @@ public class Usuario {
 	
 	private String telefono;
 	
-	private  String direccion;
+	private String direccion;
 	
 	private Date fecha;
 	
-	public Usuario() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	
-	public Usuario(Integer id, String nombres, String apellidos, String email, String password, String telefono,
-			String direccion, Date fecha, Rol rol) {
-		super();
-		this.id = id;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
-		this.email = email;
-		this.password = password;
-		this.telefono = telefono;
-		this.direccion = direccion;
-		this.fecha = fecha;
-		this.rol = rol;
-	}
-
-
-
 	@ManyToOne
-	@JoinColumn(name="rol")
+	@JoinColumn(name = "rol")
 	private Rol rol;
 
 	/**
@@ -182,7 +159,6 @@ public class Usuario {
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
-	
 	
 	
 }

@@ -5,38 +5,24 @@ import javax.persistence.Id;
 
 @Entity
 public class Categoria {
-
+	
 	@Id
-	private String id;
+	private String codigo;
 	
 	private String nombre;
-	
-	public Categoria() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	
-	public Categoria(String id, String nombre) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-	}
-
-
 
 	/**
-	 * @return the id
+	 * @return the codigo
 	 */
-	public String getId() {
-		return id;
+	public String getCodigo() {
+		return codigo;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param codigo the codigo to set
 	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	/**
@@ -52,6 +38,5 @@ public class Categoria {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
 	
 }

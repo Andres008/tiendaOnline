@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.tienda.online.models.Rol;
 
 @Repository
-public interface RolRepository extends CrudRepository<Rol, Integer> {
+public interface RolRepository extends CrudRepository<Rol, Integer>{
 
 }

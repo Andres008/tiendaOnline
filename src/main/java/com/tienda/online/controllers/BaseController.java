@@ -16,18 +16,17 @@ import com.tienda.online.models.dto.response.ErrorResponse;
 public class BaseController {
 
 	final static Logger logger = LoggerFactory.getLogger(BaseController.class);
-	
+
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(NoSuchElementException.class)
-	public ErrorResponse return404(NoSuchElementException ex)
-	{
+	public ErrorResponse return404(NoSuchElementException ex) {
 		return new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND.value());
 	}
 	
 	@ResponseStatus(HttpStatus.CONFLICT)
 	@ExceptionHandler(DataIntegrityViolationException.class)
-	public ErrorResponse return409(DataIntegrityViolationException ex)
-	{
+	public ErrorResponse return409(DataIntegrityViolationException ex) {
 		return new ErrorResponse(ex.getMessage(), HttpStatus.CONFLICT.value());
 	}
+
 }

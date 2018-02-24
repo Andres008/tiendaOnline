@@ -1,5 +1,6 @@
 package com.tienda.online.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,16 @@ public class IngresoProductoService {
 		this.ingresoProductoRepository = ingresoProductoRepository;
 	}
 	
-	public IngresoProducto guardarIngresoProducto(IngresoProducto ingresoProducto) {
+	public IngresoProducto guardar(IngresoProducto ingresoProducto) {
+		ingresoProducto.setFechaIngreso(new Date());
 		return ingresoProductoRepository.save(ingresoProducto);
 	}
 	
-	public List<IngresoProducto> buscarTodoIgresoProducto(){
+	public List<IngresoProducto> obtenerTodos(){
 		return (List<IngresoProducto>) ingresoProductoRepository.findAll();
 	}
 	
-	public void eliminarIngresoProducto (Integer id) {
-		ingresoProductoRepository.delete(id);
+	public void eliminar(Integer codigo) {
+		ingresoProductoRepository.delete(codigo);
 	}
-	
 }

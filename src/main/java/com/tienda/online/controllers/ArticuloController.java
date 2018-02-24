@@ -1,6 +1,7 @@
 package com.tienda.online.controllers;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,60 +24,48 @@ import com.tienda.online.services.ArticuloService;
 @RequestMapping("/articulo")
 public class ArticuloController {
 
-	private static final Logger  logger = LoggerFactory.getLogger(ArticuloController.class);
-	private ArticuloService articuloService;
+private static final Logger logger = LoggerFactory.getLogger(ArticuloController.class); 
 	
+	private ArticuloService articuloService;
+
 	@Autowired
 	public ArticuloController(ArticuloService articuloService) {
 		super();
 		this.articuloService = articuloService;
 	}
 	
-	@GetMapping(produces = "application/json")
-	public List<Articulo> obtener()
-	{
+	@PostMapping(produces="application/json")
+	public Articulo guardar(@RequestBody @Validated Articulo articulo) {
 		try {
-			return articuloService.obtenerTodosArticulos();
-		}catch (DataIntegrityViolationException e) {
-			logger.info("Error en el consumo del servicio obtener Articulo: "+e.getMessage());
-			throw new DataIntegrityViolationException(e.getMessage());
+			Articulo item = articuloService.guardar(articulo);
+			if(item == null) {
+				throw new DataIntegrityViolationException("Ya existe un articulo con nombre: " + articulo.getNombre());
+			}
+			return item;
+		} catch (NoSuchElementException e) {
+			logger.info("Error en el consumo del servicio guardaArticulo: " + e.getMessage());
+			throw new NoSuchElementException(e.getMessage());
 		}
-		
 	}
 	
-	@PostMapping(produces="application/json")
-	public Articulo guardar(@RequestBody @Validated Articulo articulo)
-	{
+	@GetMapping(produces="application/json")
+	public List<Articulo> obtenerTodos() {
 		try {
-			return articuloService.guardarArticulo(articulo);
-		} catch (DataIntegrityViolationException e) {
-			logger.info("Error en el consumo del servicio guardar Articulo: "+e.getMessage());
-			throw new DataIntegrityViolationException(e.getMessage());
+			return articuloService.obtenerTodos();
+		} catch (NoSuchElementException e) {
+			logger.info("Error en el consumo del servicio obtenerTodos: " + e.getMessage());
+			throw new NoSuchElementException(e.getMessage());
 		}
 	}
+	
 	
 	@PutMapping(produces="application/json")
-	public Articulo actualizar(@RequestBody @Validated Articulo articulo)
-	{
-		try {
-			return articuloService.guardarArticulo(articulo);
-		} catch (DataIntegrityViolationException e) {
-			logger.info("Error en el consumo del servicio actualizar Articulo: "+e.getMessage());
-			throw new DataIntegrityViolationException(e.getMessage());
-		}
+	public Articulo actualizar(@RequestBody @Validated Articulo articulo) {
+		return articuloService.guardar(articulo);
 	}
 	
-	
-	@RequestMapping(path="/{codigo}", produces="aplication/json", method= RequestMethod.DELETE)
-	public void eliminar(@PathVariable(value="codigo") Integer id) {
-		try {
-			articuloService.eliminar(id); 
-		} catch (Exception e) {
-			logger.info("Error en el consumo del servicio eliminar Articulo: "+e.getMessage());
-			throw new DataIntegrityViolationException(e.getMessage());
-		}
+	@RequestMapping(path="/{codigo}", produces="application/json", method=RequestMethod.DELETE)
+	public void eliminar(@PathVariable(value="codigo") Integer codigo) {
+		articuloService.eliminar(codigo);
 	}
-	
-	
-	
 }

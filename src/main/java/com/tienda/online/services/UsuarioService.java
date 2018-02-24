@@ -3,6 +3,7 @@ package com.tienda.online.services;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tienda.online.models.Usuario;
@@ -13,25 +14,26 @@ public class UsuarioService {
 
 	private UsuarioRepository usuarioRepository;
 
+	@Autowired
 	public UsuarioService(UsuarioRepository usuarioRepository) {
 		super();
 		this.usuarioRepository = usuarioRepository;
 	}
 	
-	public Usuario guardarUsuario(Usuario usuario) {
+	public Usuario guardar(Usuario usuario) {
 		usuario.setFecha(new Date());
 		Usuario usuarioExiste = usuarioRepository.findByEmail(usuario.getEmail());
-		
-		if(usuarioExiste == null)
+		if (usuarioExiste == null) {
 			return usuarioRepository.save(usuario);
+		}
 		return null;
 	}
 	
-	public List<Usuario> obtenerTodoUsuario(){
+	public List<Usuario> obtenerTodos(){
 		return (List<Usuario>) usuarioRepository.findAll();
 	}
 	
-	public void eliminarUsuario(Integer id) {
-		usuarioRepository.delete(id);
+	public void eliminar(Integer codigo) {
+		usuarioRepository.delete(codigo);
 	}
 }

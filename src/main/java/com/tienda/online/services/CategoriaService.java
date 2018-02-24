@@ -19,17 +19,15 @@ public class CategoriaService {
 		this.categoriaRepository = categoriaRepository;
 	}
 	
-	public Categoria guardarCategoria(Categoria categoria) {
+	public Categoria guardar(Categoria categoria) {
 		return categoriaRepository.save(categoria);
 	}
 	
-	public List<Categoria> obtenerTodosCategoria(){
+	public List<Categoria> obtenerTodos(){
 		return (List<Categoria>) categoriaRepository.findAll();
 	}
 	
-	public void eliminarCategoria(String id) {
-		categoriaRepository.delete(id);
+	public void eliminar(String codigo) {
+		categoriaRepository.delete(codigo);
 	}
-	
-	
 }

@@ -11,7 +11,7 @@ import com.tienda.online.repositories.CompraRepository;
 
 @Service
 public class CompraService {
-	
+
 	private CompraRepository compraRepository;
 
 	@Autowired
@@ -20,23 +20,20 @@ public class CompraService {
 		this.compraRepository = compraRepository;
 	}
 	
-	public Compra guardarCompra(Compra compra) {
+	public Compra guardar(Compra compra) {
 		compra.setFecha(new Date());
-		compra.setNroDocumento("00000000"+compraRepository.count()+1);
-		compra.getListaDetalleCompra().forEach(detalle->{
-			detalle.setCompraId(compra);
+		compra.setNroDocumento("0000000"+ compraRepository.count() + 1);
+		compra.getListaDetalleCompra().forEach(detalle ->{
+			detalle.setCompra(compra);
 		});
 		return compraRepository.save(compra);
 	}
 	
-	public List<Compra> obtenerTodoCompra(){
+	public List<Compra> obtenerTodos(){
 		return (List<Compra>) compraRepository.findAll();
 	}
 	
-	public void eliminarCompra(Integer id) {
-		compraRepository.delete(id);
+	public void eliminar(Integer codigo) {
+		compraRepository.delete(codigo);
 	}
-	
-	
-
 }

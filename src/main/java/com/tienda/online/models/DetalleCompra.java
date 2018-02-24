@@ -11,9 +11,8 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name="detalle_compra")
+@Entity
 public class DetalleCompra {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -25,41 +24,13 @@ public class DetalleCompra {
 	private BigDecimal total;
 	
 	@ManyToOne
-	@JoinColumn(name="compra_id")
+	@JoinColumn(name = "compra")
 	@JsonIgnore
-	private Compra compraId;
+	private Compra compra;
 	
 	@ManyToOne
-	@JoinColumn(name="ariculo_id")
-	private Articulo articuloId;
-	
-	/**
-	 * 
-	 * @param id
-	 * @param cantidad
-	 * @param subtotal
-	 * @param total
-	 * @param compraId
-	 * @param articuloId
-	 */
-	public DetalleCompra(Integer id, Integer cantidad, BigDecimal subtotal, BigDecimal total, Compra compraId,
-			Articulo articuloId) {
-		super();
-		this.id = id;
-		this.cantidad = cantidad;
-		this.subtotal = subtotal;
-		this.total = total;
-		this.compraId = compraId;
-		this.articuloId = articuloId;
-	}
-
-
-
-	public DetalleCompra() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
+	@JoinColumn(name = "articulo")
+	private Articulo articulo;
 
 	/**
 	 * @return the id
@@ -118,32 +89,31 @@ public class DetalleCompra {
 	}
 
 	/**
-	 * @return the compraId
+	 * @return the compra
 	 */
-	public Compra getCompraId() {
-		return compraId;
+	public Compra getCompra() {
+		return compra;
 	}
 
 	/**
-	 * @param compraId the compraId to set
+	 * @param compra the compra to set
 	 */
-	public void setCompraId(Compra compraId) {
-		this.compraId = compraId;
+	public void setCompra(Compra compra) {
+		this.compra = compra;
 	}
 
 	/**
-	 * @return the articuloId
+	 * @return the articulo
 	 */
-	public Articulo getArticuloId() {
-		return articuloId;
+	public Articulo getArticulo() {
+		return articulo;
 	}
 
 	/**
-	 * @param articuloId the articuloId to set
+	 * @param articulo the articulo to set
 	 */
-	public void setArticuloId(Articulo articuloId) {
-		this.articuloId = articuloId;
+	public void setArticulo(Articulo articulo) {
+		this.articulo = articulo;
 	}
-	
 	
 }

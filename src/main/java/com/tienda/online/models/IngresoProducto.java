@@ -10,28 +10,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@Entity(name="ingreso_producto")
+@Entity
+@Table(name = "INGRESO_PRODUCTO")
 public class IngresoProducto {
-	
+
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
 	private Integer cantidad;
 	
-	@Column(name="fecha_ingreso")
+	@Column(name = "fecha_ingreso")
 	private Date fechaIngreso;
 	
 	private BigDecimal total;
 	
 	@ManyToOne
-	@JoinColumn(name="articulo")
-	private Articulo articulo;
+	@JoinColumn(name = "usuario")
+	private Usuario usuario;
 	
 	@ManyToOne
-	@JoinColumn(name="usuario")
-	private Usuario usuario;
+	@JoinColumn(name = "articulo")
+	private Articulo articulo;
 
 	/**
 	 * @return the id
@@ -90,20 +92,6 @@ public class IngresoProducto {
 	}
 
 	/**
-	 * @return the articulo
-	 */
-	public Articulo getArticulo() {
-		return articulo;
-	}
-
-	/**
-	 * @param articulo the articulo to set
-	 */
-	public void setArticulo(Articulo articulo) {
-		this.articulo = articulo;
-	}
-
-	/**
 	 * @return the usuario
 	 */
 	public Usuario getUsuario() {
@@ -116,7 +104,19 @@ public class IngresoProducto {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	
 
+	/**
+	 * @return the articulo
+	 */
+	public Articulo getArticulo() {
+		return articulo;
+	}
+
+	/**
+	 * @param articulo the articulo to set
+	 */
+	public void setArticulo(Articulo articulo) {
+		this.articulo = articulo;
+	}
+	
 }

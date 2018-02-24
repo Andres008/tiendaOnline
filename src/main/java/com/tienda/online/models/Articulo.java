@@ -2,16 +2,19 @@ package com.tienda.online.models;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 
 @Entity
 public class Articulo {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
 	private String nombre;
@@ -24,35 +27,13 @@ public class Articulo {
 	
 	private Integer descuento;
 	
-	@ManyToOne
-	@JoinColumn(name="categoria_id")
-	private Categoria categoriaId;
-	
 	private Date fecha;
 	
 	private String url;
 	
-	public Articulo() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-
-	public Articulo(Integer id, String nombre, String descripcion, BigDecimal precio, Integer cantidad,
-			Integer descuento, Categoria categoriaId, Date fecha, String url) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.precio = precio;
-		this.cantidad = cantidad;
-		this.descuento = descuento;
-		this.categoriaId = categoriaId;
-		this.fecha = fecha;
-		this.url = url;
-	}
-
-
+	@ManyToOne
+	@JoinColumn(name = "categoria")
+	private Categoria categoria;
 
 	/**
 	 * @return the id
@@ -139,20 +120,6 @@ public class Articulo {
 	}
 
 	/**
-	 * @return the categoriaId
-	 */
-	public Categoria getCategoriaId() {
-		return categoriaId;
-	}
-
-	/**
-	 * @param categoriaId the categoriaId to set
-	 */
-	public void setCategoriaId(Categoria categoriaId) {
-		this.categoriaId = categoriaId;
-	}
-
-	/**
 	 * @return the fecha
 	 */
 	public Date getFecha() {
@@ -179,6 +146,19 @@ public class Articulo {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
+
+	/**
+	 * @return the categoria
+	 */
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	/**
+	 * @param categoria the categoria to set
+	 */
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	} 
 	
 }
