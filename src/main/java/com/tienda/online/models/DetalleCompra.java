@@ -33,6 +33,15 @@ public class DetalleCompra {
 	@JoinColumn(name="ariculo_id")
 	private Articulo articuloId;
 	
+	/**
+	 * 
+	 * @param id
+	 * @param cantidad
+	 * @param subtotal
+	 * @param total
+	 * @param compraId
+	 * @param articuloId
+	 */
 	public DetalleCompra(Integer id, Integer cantidad, BigDecimal subtotal, BigDecimal total, Compra compraId,
 			Articulo articuloId) {
 		super();
